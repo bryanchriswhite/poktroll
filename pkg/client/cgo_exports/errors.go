@@ -1,7 +1,10 @@
 package main
 
+// TODO_TECHDEBT: improve error handling:
+//   - be conventional (error codes?)
+
 // #cgo CFLAGS: -I./include
-// #include <events_query_client.h>
+// #include <client.h>
 import "C"
 
 var errorCodeMessageMap = map[int]string{
