@@ -5,16 +5,11 @@ package main
 #include <stdlib.h>
 typedef void* (*callback_type)(void*, char**);
 //void bridge_callback(callback_fn *cb, void* data, char** err);
-void bridge_callback(callback_fn *cb, void* data, char** err) {
+static void bridge_callback(callback_fn *cb, void* data, char** err) {
     if (cb) {
         cb(data, err);
     }
 }
-
-////static void *bridge_callback(callback_fn *cb, void *data, char **err) {
-//static void *bridge_callback(void *(*cb)(void*, char**), void *data, char **err) {
-//	return cb(data, err);
-//};
 */
 import "C"
 import (
