@@ -1,5 +1,5 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#ifndef CLIENT_H
+#define CLIENT_H
 
 #include <stdint.h>
 
@@ -8,11 +8,8 @@
 //  Block *Block;
 //} BlockResult;
 
-typedef int64_t GoRef;
+typedef void *(callback_fn)(void *data, char **err);
 
-enum ErrorCode {
-    EVENTS_BYTES_SYNC_ERROR,
-    EVENTS_BYTES_ASYNC_ERROR,
-};
+typedef int64_t go_ref;
 
 #endif

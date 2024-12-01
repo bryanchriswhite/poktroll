@@ -6,7 +6,7 @@ import "fmt"
 
 const (
 	NilRef  = GoRef(-1)
-	CNilRef = C.GoRef(NilRef)
+	CNilRef = C.go_ref(NilRef)
 )
 
 var (
@@ -20,14 +20,14 @@ type GoRef int64
 func main() {}
 
 // TODO_IN_THIS_COMMIT: godoc...
-func SetGoMem(value any) C.GoRef {
+func SetGoMem(value any) C.go_ref {
 	nextGoMemRef++
 	goMemoryMap[nextGoMemRef] = value
-	return C.GoRef(nextGoMemRef)
+	return C.go_ref(nextGoMemRef)
 }
 
 // TODO_IN_THIS_COMMIT: godoc...
-func GetGoMem[T any](ref C.GoRef) (T, error) {
+func GetGoMem[T any](ref C.go_ref) (T, error) {
 	value, ok := goMemoryMap[GoRef(ref)]
 	if !ok {
 		return *new(T), fmt.Errorf("go memory reference not found: %d", ref)
@@ -44,6 +44,6 @@ func GetGoMem[T any](ref C.GoRef) (T, error) {
 // TODO_IN_THIS_COMMIT: godoc...
 //
 //export FreeGoMem
-func FreeGoMem(ref C.GoRef) {
+func FreeGoMem(ref C.go_ref) {
 	delete(goMemoryMap, GoRef(ref))
 }

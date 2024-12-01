@@ -14,7 +14,7 @@ import (
 )
 
 //export NewBlockQueryClient
-func NewBlockQueryClient(cometWebsocketURL *C.char, cErr **C.char) C.GoRef {
+func NewBlockQueryClient(cometWebsocketURL *C.char, cErr **C.char) C.go_ref {
 	// TODO_TECHDEBT: support opts args.
 	blockQueryClient, err := sdkclient.NewClientFromNode(C.GoString(cometWebsocketURL))
 	if err != nil {
@@ -25,8 +25,8 @@ func NewBlockQueryClient(cometWebsocketURL *C.char, cErr **C.char) C.GoRef {
 	return SetGoMem(blockQueryClient)
 }
 
-//export BlockQueryClientBlock
-func BlockQueryClientBlock(clientRef C.GoRef, cHeight *C.int64_t, cErr **C.char) C.GoRef {
+//export BlockQuery_ClientBlock
+func BlockQuery_ClientBlock(clientRef C.go_ref, cHeight *C.int64_t, cErr **C.char) C.go_ref {
 	var height *int64
 	if cHeight != nil {
 		*height = int64(*cHeight)

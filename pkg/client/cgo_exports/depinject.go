@@ -9,7 +9,7 @@ import (
 )
 
 //export Supply
-func Supply(goRef C.GoRef, cErr **C.char) C.GoRef {
+func Supply(goRef C.go_ref, cErr **C.char) C.go_ref {
 	toSupply, err := GetGoMem[any](goRef)
 	if err != nil {
 		*cErr = C.CString(err.Error())
@@ -20,7 +20,7 @@ func Supply(goRef C.GoRef, cErr **C.char) C.GoRef {
 }
 
 //export SupplyMany
-func SupplyMany(goRefs *C.GoRef, numGoRefs C.int, cErr **C.char) C.GoRef {
+func SupplyMany(goRefs *C.go_ref, numGoRefs C.int, cErr **C.char) C.go_ref {
 	refs := unsafe.Slice(goRefs, numGoRefs)
 
 	//fmt.Printf(">>> refs: %+v\n", refs)
@@ -47,7 +47,7 @@ func SupplyMany(goRefs *C.GoRef, numGoRefs C.int, cErr **C.char) C.GoRef {
 }
 
 //export Config
-func Config(goRefs *C.GoRef, numGoRefs C.int, cErr **C.char) C.GoRef {
+func Config(goRefs *C.go_ref, numGoRefs C.int, cErr **C.char) C.go_ref {
 	refs := unsafe.Slice(goRefs, numGoRefs)
 
 	var configs []depinject.Config

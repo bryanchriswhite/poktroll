@@ -13,7 +13,7 @@ import (
 import "C"
 
 //export NewBlockClient
-func NewBlockClient(depsRef C.GoRef, cErr **C.char) C.GoRef {
+func NewBlockClient(depsRef C.go_ref, cErr **C.char) C.go_ref {
 	// TODO_CONSIDERATION: Could support a version of methods which receive a go context, created elsewhere..
 	ctx := context.Background()
 

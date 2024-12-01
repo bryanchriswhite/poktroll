@@ -13,7 +13,7 @@ import (
 )
 
 //export NewEventsQueryClient
-func NewEventsQueryClient(cometWebsocketURLCString *C.char) C.GoRef {
+func NewEventsQueryClient(cometWebsocketURLCString *C.char) C.go_ref {
 	// TODO_TECHDEBT: support opts args.
 	cometWebsocketURL := C.GoString(cometWebsocketURLCString)
 	eventsQueryClient := events.NewEventsQueryClient(cometWebsocketURL)
@@ -22,7 +22,7 @@ func NewEventsQueryClient(cometWebsocketURLCString *C.char) C.GoRef {
 }
 
 //export EventsQueryClientEventsBytes
-func EventsQueryClientEventsBytes(clientRef C.GoRef, query *C.char, cErr **C.char) C.GoRef {
+func EventsQueryClientEventsBytes(clientRef C.go_ref, query *C.char, cErr **C.char) C.go_ref {
 	// TODO_CONSIDERATION: Could support a version of methods which receive a go context, created elsewhere..
 	ctx := context.Background()
 

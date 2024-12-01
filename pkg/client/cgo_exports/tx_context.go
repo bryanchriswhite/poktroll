@@ -60,10 +60,10 @@ func init() {
 
 // TODO_IN_THIS_COMMIT: godoc...
 // TODO_IN_THIS_COMMIT: add seperate constructor which supports deps...
-// func NewTxContext(depsRef C.GoRef, cErr **C.char) C.GoRef {
+// func NewTxContext(depsRef C.go_ref, cErr **C.char) C.go_ref {
 //
 //export NewTxContext
-func NewTxContext(tcpURL *C.char, cErr **C.char) C.GoRef {
+func NewTxContext(tcpURL *C.char, cErr **C.char) C.go_ref {
 	//deps, err := GetGoMem[depinject.Config](depsRef)
 	//if err != nil {
 	//	*cErr = C.CString(err.Error())
