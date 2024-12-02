@@ -117,6 +117,20 @@ func TxClient_SignAndBroadcastAny(txClientRef C.go_ref, msgAnyJSON *C.char, cErr
 	return C.go_ref(SetGoMem(errCh))
 }
 
+// TODO_IN_THIS_COMMIT: move & godoc...
+func init() {
+	// TODO_IN_THIS_COMMIT: design a consise way to register all message types.
+	// TODO_CONSIDERATION: expose a method to add message types just in case.
+	for _, msg := range []cosmosproto.Message{
+		new(apptypes.MsgStakeApplication),
+		new(apptypes.MsgUnstakeApplication),
+	} {
+		msgTypeUrl := cosmostypes.MsgTypeURL(msg)
+		trimmedMsgTypeUrl := strings.Trim(msgTypeUrl, "/")
+		proto.RegisterType(msg, trimmedMsgTypeUrl)
+	}
+}
+
 //export TxClient_SignAndBroadcast
 func TxClient_SignAndBroadcast(
 	txClientRef C.go_ref,
@@ -126,16 +140,6 @@ func TxClient_SignAndBroadcast(
 	callbackFn *C.callback_fn,
 	cErr **C.char,
 ) C.go_ref {
-	// TODO_IN_THIS_COMMIT: design a consise way to register all message types.
-	// TODO_CONSIDERATION: expose a method to add message types just in case.
-	appStakeMsg := new(apptypes.MsgStakeApplication)
-	msgTypeUrl := cosmostypes.MsgTypeURL(appStakeMsg)
-	fmt.Printf(">>>> typeUrl: %s\n", msgTypeUrl)
-	trimmedMsgTypeUrl := strings.Trim(msgTypeUrl, "/")
-	fmt.Printf(">>>> trimmedMsgTypeUrl: %s\n", trimmedMsgTypeUrl)
-	fmt.Printf(">>>> trimmedMsgTypeUrl == typeUrl: %v\n", trimmedMsgTypeUrl == string(C.GoString(typeUrl)))
-	proto.RegisterType(appStakeMsg, trimmedMsgTypeUrl)
-
 	//msgType, err := protoregistry.GlobalTypes.FindMessageByURL(C.GoString(typeUrl))
 	// TODO_IN_THIS_COMMIT: double-check typeUrl - may need to convert to non-protoreflect type.
 	fmt.Printf(">>>> typeUrl: %s\n", string(C.GoString(typeUrl)))
